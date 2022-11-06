@@ -1,0 +1,16 @@
+FROM golang:1.14-alpine
+WORKDIR /kafka
+
+
+#Dependencies for librdkafka
+RUN apk --no-cache add bash \
+    build-base git
+RUN apk --no-cache add curl \
+    git pkgconfig && set -eou pipefail curl https://glide.sh/get | sh
+
+# Clone & build librdkafka
+RUN git clone https://github.com/edenhill/librdkafka.git
+WORKDIR /kafka/librdkafka
+RUN /kafka/librdkafka/configure --prefix /usr
+RUN make
+RUN make install

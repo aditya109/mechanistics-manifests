@@ -1,0 +1,28 @@
+FROM ubuntu:18.04
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y curl && \
+    apt-get install -y tzdata
+
+RUN ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && \
+	dpkg-reconfigure --frontend noninteractive tzdata
+
+RUN useradd mongod
+
+COPY keyfile_mongos /etc/keyfile_mongos
+
+RUN chown mongod:mongod /etc/keyfile_mongos
+
+RUN chmod 400 /etc/keyfile_mongos
+
+RUN mkdir -p /var/log/mongodb
+
+RUN mkdir -p /var/run/mongodb
+
+RUN curl -O  https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.13.tgz && \
+    tar -zxvf mongodb-linux-x86_64-4.0.13.tgz && \
+    cp mongodb-linux-x86_64-4.0.13/bin/mongos /usr/bin && \
+    rm -rf mongodb-linux-x86_64-4.0.13*
+
+
+EXPOSE 27017

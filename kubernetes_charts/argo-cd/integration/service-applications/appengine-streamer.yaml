@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: appengine-streamer
+  namespace: argocd
+spec:
+  destination:
+    namespace: appengine-mysqlstreamer
+    server: https://kubernetes.default.svc
+  project: data
+  source:
+    path: appengine-mysqlstreamer/integration/
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD

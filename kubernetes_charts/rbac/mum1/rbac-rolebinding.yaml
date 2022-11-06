@@ -1,0 +1,134 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: techies-rbac
+subjects:
+  - kind: User
+    name: sushant
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: bhoopesh
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: arjun
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: rakshith.s
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: gokul
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: rahil
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: vanishree
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: adityasinghania
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: Anil
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: janardhanan
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: janakiram
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: punith
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: archit.sinha
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: abhinav
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: shubham.singh
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: sagar
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: mukul
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: shantanu
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: abhishekshingane
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: hema.bandari
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: nikhil.k
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: sonal
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: sriram
+    apiGroup: rbac.authorization.k8s.io
+  
+  - kind: User
+    name: hemanshu.khilari
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: utkarsh.nayak
+    apiGroup: rbac.authorization.k8s.io
+  
+  - kind: User
+    name: aditya.bellary
+    apiGroup: rbac.authorization.k8s.io
+  
+  - kind: User
+    name: rahul.gupta
+    apiGroup: rbac.authorization.k8s.io
+  
+  - kind: User
+    name: nishant.chaudhary
+    apiGroup: rbac.authorization.k8s.io
+  
+  - kind: User
+    name: shaik.moulali
+    apiGroup: rbac.authorization.k8s.io
+  
+  - kind: User
+    name: sameer.nimushakavi
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: stuti.jaiswal
+    apiGroup: rbac.authorization.k8s.io
+
+roleRef:
+  kind: ClusterRole
+  name:  techies-readonly
+  apiGroup: rbac.authorization.k8s.io
+

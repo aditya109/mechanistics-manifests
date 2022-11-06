@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-autoscaler
+  namespace: argocd
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: infra
+  source:
+    helm:
+      valueFiles:
+      - values/values.integration.yaml
+    path: cluster-basics/cluster-autoscaler/1.17/cluster-autoscaler
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/kubernetes_charts.git
+    targetRevision: feature/eks-17-components
+  syncPolicy:
+    automated:
+      selfHeal: true

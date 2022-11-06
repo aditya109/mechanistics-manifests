@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: approvalsystem
+  namespace: argocd
+spec:
+  destination:
+    namespace: approvalsystem
+    server: https://kubernetes.default.svc
+  project: billing
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: approvalsystem/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD
+  syncPolicy: {}

@@ -1,0 +1,157 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::323529618611:role/exotel-mum120191126010538546200000009 
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+
+
+  mapUsers: |
+    - userarn: arn:aws:iam::323529618611:user/narayanababu
+      username: narayanababu
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/athavan
+      username: athavan
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/govind
+      username: govind
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/rakshith.s
+      username: rakshith.s
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/gokul
+      username: gokul
+
+    - userarn: arn:aws:iam::323529618611:user/rahil
+      username: rahil
+
+    - userarn: arn:aws:iam::323529618611:user/sushant
+      username: sushant
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/vanishree
+      username: vanishree
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/adityasinghania
+      username: adityasinghania
+
+    - userarn: arn:aws:iam::323529618611:user/Anil
+      username: Anil
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/bhoopesh
+      username: bhoopesh
+
+    - userarn: arn:aws:iam::323529618611:user/arjun
+      username: arjun
+
+    - userarn: arn:aws:iam::323529618611:user/janardhanan
+      username: janardhanan
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/janakiram
+      username: janakiram
+
+    - userarn: arn:aws:iam::323529618611:user/punith
+      username: punith
+    - userarn: arn:aws:iam::323529618611:user/archit.sinha
+      username: archit.sinha
+
+    - userarn: arn:aws:iam::323529618611:user/abhinav
+      username: abhinav
+
+    - userarn: arn:aws:iam::323529618611:user/shubham.singh
+      username: shubham.singh
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/sagar
+      username: sagar
+
+    - userarn: arn:aws:iam::323529618611:user/mukul
+      username: mukul
+
+    - userarn: arn:aws:iam::323529618611:user/shantanu
+      username: shantanu
+    
+    - userarn: arn:aws:iam::323529618611:user/abhishekshingane
+      username: abhishekshingane
+
+    - userarn: arn:aws:iam::323529618611:user/hema.bandari
+      username: hema.bandari
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::323529618611:user/nikhil.k
+      username: nikhil.k
+
+    - userarn: arn:aws:iam::323529618611:user/sonal
+      username: sonal
+
+    - userarn: arn:aws:iam::323529618611:user/sriram
+      username: sriram
+      groups:
+        - system:masters
+      
+    - userarn: arn:aws:iam::323529618611:user/hemanshu.khilari
+      username: hemanshu.khilari
+
+    - userarn: arn:aws:iam::323529618611:user/utkarsh.nayak
+      username: utkarsh.nayak
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::323529618611:user/aditya.bellary
+      username: aditya.bellary
+    
+    - userarn: arn:aws:iam::323529618611:user/rahul.gupta
+      username: rahul.gupta
+    
+    - userarn: arn:aws:iam::323529618611:user/nishant.chaudhary
+      username: nishant.chaudhary
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::323529618611:user/shaik.moulali
+      username: shaik.moulali
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::323529618611:user/sameer.nimushakavi
+      username: sameer.nimushakavi
+    
+    - userarn: arn:aws:iam::323529618611:user/stuti.jaiswal
+      username: stuti.jaiswal
+      groups:
+        - system:masters
+
+    # From here add the Read only Users
+
+    - userarn: arn:aws:iam::323529618611:user/shashank.hegde
+      username: shashank.hegde
+    
+    - userarn: arn:aws:iam::323529618611:user/saijayanth.p
+      username: saijayanth.p  
+
+  mapAccounts: |
+
+

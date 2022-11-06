@@ -1,0 +1,22 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: invoicesystem
+  namespace: argocd
+spec:
+  destination:
+    namespace: invoicesystem
+    server: https://kubernetes.default.svc
+  project: billing
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: invoicesystem/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

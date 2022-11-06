@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apix
+  namespace: argocd
+spec:
+  destination:
+    namespace: apix
+    server: https://kubernetes.default.svc
+  project: mapi
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: apix/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD
+  syncPolicy: {}

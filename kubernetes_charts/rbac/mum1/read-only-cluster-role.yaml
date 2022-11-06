@@ -1,0 +1,68 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: read-only-cluster-role
+rules:
+  - apiGroups:
+      - "extensions"
+    resources:
+      - "*"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "autoscaling"
+    resources:
+      - "*"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "batch"
+    resources:
+      - "jobs"
+      - "jobs/status"
+      - "cronjobs"
+      - "cronjobs/status"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+  - apiGroups:
+      - "storage.k8s.io"
+    resources:
+      - "storageclasses"
+      - "volumeattachments"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+  - apiGroups: 
+      - ""
+      - "apps"
+      - "extensions"
+    resources: 
+      - "autoscaling"
+      - "events"
+      - "pods"
+      - "pods/log"
+      - "pods/exec"
+      - "pods/portforward"
+      - "deployments"
+      - "services"
+      - "configmaps"
+      - "namespaces"
+      - "nodes"
+      - "replicasets"
+      - "persistentvolumes"
+      - "persistentvolumeclaims"
+      - "serviceaccounts"
+    verbs: 
+      - "get"
+      - "list"
+      - "watch"
+  
+

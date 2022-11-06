@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  # infra containers
+  db:
+    container_name: local-leadassist-mysql-db
+    build:
+      context: .
+      dockerfile: ./tools/db.Dockerfile
+    environment:
+      MYSQL_DATABASE: "hulk"
+      MYSQL_PASSWORD: "Destro-333"
+      MYSQL_ROOT_PASSWORD: "Destro-333"
+    ports:
+      - 3306:3306
+    volumes:
+      - my-db:/var/lib/mysql
+      - ./schema/schema/migration.sql:/var/scripts/schema.sql
+  queue:
+    container_name: local-leadassist-beanstalkd-queue
+    build:
+      context: .
+      dockerfile: ./queue.Dockerfile
+    ports:
+      - 11300:11300
+    volumes:
+      - my-binlog:/binlog
+  cache:
+    image: aerospike/aerospike-server
+    container_name: local-leadassist-aerospike-cache
+    ports:
+      - 3000:3000
+    volumes:
+      - ./tools/aerospike.conf:/opt/aerospike/aerospike.conf
+    command:
+      [
+        "asd",
+        "--foreground",
+        "--config-file",
+        "/opt/aerospike/aerospike.conf"
+      ]

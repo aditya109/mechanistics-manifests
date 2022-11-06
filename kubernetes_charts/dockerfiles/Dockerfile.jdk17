@@ -1,0 +1,12 @@
+# We're using the alpine build of this java version because the base openjdk:17 does not come with any package manager
+FROM openjdk:17-alpine
+
+RUN wget http://archive.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz && \
+  tar -zxvf apache-maven-3.5.4-bin.tar.gz && \
+  rm apache-maven-3.5.4-bin.tar.gz && \
+  mv apache-maven-3.5.4 /usr/lib/mvn
+
+ENV PATH /usr/lib/mvn/bin:$PATH
+ENV JAVA_HOME /opt/openjdk-17/
+
+RUN apk add make

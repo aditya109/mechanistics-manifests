@@ -1,0 +1,9 @@
+FROM alpine:3.10
+
+RUN apk update && \
+apk add ca-certificates && \
+apk add tzdata && \
+cp  /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && \
+echo  "Asia/Kolkata" > /etc/timezone && \
+rm -rf /var/cache/apk/*
+

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluentd-logging
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: infra
+  source:
+    path: fluentd-logging/integration/ 
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/kubernetes_charts.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true

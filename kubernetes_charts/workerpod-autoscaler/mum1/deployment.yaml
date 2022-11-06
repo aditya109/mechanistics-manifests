@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: workerpodautoscaler
+ namespace: kube-system
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: workerpodautoscaler
+ template:
+   metadata:
+     labels:
+       app: workerpodautoscaler
+   spec:
+     serviceAccount: workerpodautoscaler
+     serviceAccountName: workerpodautoscaler
+     containers:
+     - name: wpa
+       image: exotelorg/workerpodautoscaler:1.0.9
+       imagePullPolicy: Always
+       command:
+       - /workerpodautoscaler
+       - run
+       - --resync-period=20
+       - --wpa-threads=10
+       - --aws-regions=ap-southeast-1,us-east-1,ap-south-1
+       - --sqs-short-poll-interval=20
+       - --sqs-long-poll-interval=20
+       - --beanstalk-poll-interval=5
+       resources:
+         limits:
+           cpu: 1000m
+           memory: 100Mi
+         requests:
+           cpu: 10m
+           memory: 20Mi
+                        

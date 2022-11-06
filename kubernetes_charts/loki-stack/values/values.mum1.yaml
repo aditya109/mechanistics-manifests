@@ -1,0 +1,50 @@
+loki:
+  enabled: true
+  config:
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 840h
+  persistence:
+    enabled: true
+    accessModes:
+    - ReadWriteOnce
+    size: 155Gi
+    annotations:
+
+promtail:
+  enabled: true
+
+fluent-bit:
+  enabled: false
+
+grafana:
+  enabled: true
+  sidecar:
+    datasources:
+      enabled: true
+  image:
+    tag: 6.7.0
+
+prometheus:
+  enabled: false
+
+filebeat:
+  enabled: false
+  filebeatConfig:
+    filebeat.yml: |
+      # logging.level: debug
+      filebeat.inputs:
+      - type: container
+        paths:
+          - /var/log/containers/*.log
+        processors:
+        - add_kubernetes_metadata:
+            host: ${NODE_NAME}
+            matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
+      output.logstash:
+        hosts: ["logstash-loki:5044"]
+
+logstash:
+  enabled: false

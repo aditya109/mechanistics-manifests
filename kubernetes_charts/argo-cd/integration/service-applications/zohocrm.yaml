@@ -1,0 +1,17 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zohocrm
+  namespace: argocd
+spec:
+  destination:
+    namespace: zohocrm
+    server: https://kubernetes.default.svc
+  project: mapi
+  source:
+    path: zohocrm/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}

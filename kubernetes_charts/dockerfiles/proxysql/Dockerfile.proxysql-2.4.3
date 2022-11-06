@@ -1,0 +1,8 @@
+FROM proxysql/proxysql:2.4.3
+
+LABEL maintainer="Nikhil Kukatla <nikhil.k@exotel.in>"
+LABEL maintainer="Exotel <tech@exotel.in>"
+
+WORKDIR /root
+
+CMD ["/usr/bin/proxysql", "-c", "/exotel/configs/proxysql.cnf", "-f", "--initial"]

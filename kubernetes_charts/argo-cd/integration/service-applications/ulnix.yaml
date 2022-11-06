@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ulnix
+  namespace: argocd
+spec:
+  destination:
+    namespace: ulnix
+    server: https://kubernetes.default.svc
+  project: voice
+  source:
+    path: ulnix/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD

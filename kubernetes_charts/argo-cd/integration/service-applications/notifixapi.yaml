@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: notifixapi
+  namespace: argocd
+spec:
+  destination:
+    namespace: notifixapi
+    server: https://kubernetes.default.svc
+  project: mapi
+  source:
+    path: notifixapi/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD
+  syncPolicy: {}

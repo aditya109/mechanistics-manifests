@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: service-applications
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: infra
+  source:
+    path: argo-cd/integration/service-applications
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/kubernetes_charts.git
+    targetRevision: HEAD
+

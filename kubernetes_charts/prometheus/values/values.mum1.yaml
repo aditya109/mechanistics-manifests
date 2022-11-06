@@ -1,0 +1,418 @@
+alertmanager:
+  enabled: true
+  serviceAccount:
+    create: true
+    name: ""
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: 1
+    maxUnavailable: ""
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      group_by: ['alertname', 'service' , 'namespace' ]
+      group_wait: 10s
+      group_interval: 5m
+      repeat_interval: 10m
+      receiver: 'infra-receiver'
+      routes:
+        - match:
+            namespace: 'logstash'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'frodo'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'infra'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'monitoring'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'metrics'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'kube-system'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'kube-public'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'default'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'cert-manager'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'argocd'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'istio-system'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'starix'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'call-es-worker-callmetric'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'call-es-worker-callinbox'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'jellibabix'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'appengine-mysqlstreamer'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'twlx-mysqlstreamer'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'reportix'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'logstash'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'billixasync'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'approvalsystem'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'paymentsystem'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'creditcontrol'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'invoicesystem'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'priceupdater'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'daakiyatrix'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'billixcb'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'fulliautomatix'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'billingaddendum'
+          receiver: 'billing-receiver'
+        - match:
+            namespace: 'campaignix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'postaldistrix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'authix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'leadqualix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'ceramix'
+          receiver: 'messaging-receiver'
+        - match:
+            namespace: 'ceramix-functional'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'samanval'
+          receiver: 'messaging-receiver'
+        - match:
+            namespace: 'messages'
+          receiver: 'messaging-receiver'
+        - match:
+            namespace: 'messageix'
+          receiver: 'messaging-receiver'
+        - match:
+            namespace: 'compactix'
+          receiver: 'messaging-receiver'
+        - match:
+            namespace: 'mordor'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'sanitychecker'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'lightfoot'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'firefoot'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'beatixscheduler'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'beatixworker'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'legolascloud'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'mavrix'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'vitriolix'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'subscribix'
+          receiver: 'voice-receiver'
+        - match:
+            namespace: 'loki-stack'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'addressbook'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'apix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'bilbo'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'callstatemanager'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'dashboardapi'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'notifixapi'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'notifixwebsocket'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'notp'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'obdialer'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'proxyauth'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'userix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'zohocrm'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'zohodesk'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'iamix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'campaignix'
+          receiver: 'api-receiver'
+        - match:
+            namespace: 'vpc-log-parser'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'call-es-worker'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'elb-log-parser'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'istio-log-parser'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'kafkaessyncer'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'kube-node-lease'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'logstash-auditlog'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'maxaws'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'overprovisioning'
+          receiver: 'infra-receiver'
+        - match:
+            namespace: 'reportix-ccm'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'reportix-small'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'reportix-test'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'smssyncer'
+          receiver: 'data-receiver'
+        - match:
+            namespace: 'callentitystreamer'
+          receiver: 'data-receiver'
+
+    receivers:
+    - name: 'null'
+    - name: 'default'
+      victorops_configs:
+        - api_key: '9f482147-18cd-4c27-a70e-32063856bada'
+          routing_key: 'route-infra-engg-sev0'
+          send_resolved: true
+          entity_display_name: "[Mumbai-1] {{ .CommonLabels.namespace }} - {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity | toUpper }}"
+          message_type: '{{ .CommonLabels.severity | toUpper }}'
+          state_message: "ALERT: {{ .CommonLabels.alertname }}\nMESSAGE: {{ .CommonAnnotations.message }}\nNAMESPACE: {{ .CommonLabels.namespace }}"
+
+    - name: 'data-receiver'
+      victorops_configs:
+        - api_key: '9f482147-18cd-4c27-a70e-32063856bada'
+          routing_key: 'route-dri-data-sev0'
+          send_resolved: true
+          entity_display_name: "[Mumbai-1] {{ .CommonLabels.namespace }} - {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity | toUpper }}"
+          message_type: '{{ .CommonLabels.severity | toUpper }}'
+          state_message: "ALERT: {{ .CommonLabels.alertname }}\nMESSAGE: {{ .CommonAnnotations.message }}\nNAMESPACE: {{ .CommonLabels.namespace }}"
+
+    - name: 'infra-receiver'
+      victorops_configs:
+        - api_key: '9f482147-18cd-4c27-a70e-32063856bada'
+          routing_key: 'route-infra-engg-sev0'
+          send_resolved: true
+          entity_display_name: "[Mumbai-1] {{ .CommonLabels.namespace }} - {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity | toUpper }}"
+          message_type: '{{ .CommonLabels.severity | toUpper }}'
+          state_message: "ALERT: {{ .CommonLabels.alertname }}\nMESSAGE: {{ .CommonAnnotations.message }}\nNAMESPACE: {{ .CommonLabels.namespace }}"
+
+    - name: 'api-receiver'
+      victorops_configs:
+        - api_key: '9f482147-18cd-4c27-a70e-32063856bada'
+          routing_key: 'route-dri-api-sev0'
+          send_resolved: true
+          entity_display_name: "[Mumbai-1] {{ .CommonLabels.namespace }} - {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity | toUpper }}"
+          message_type: '{{ .CommonLabels.severity | toUpper }}'
+          state_message: "ALERT: {{ .CommonLabels.alertname }}\nMESSAGE: {{ .CommonAnnotations.message }}\nNAMESPACE: {{ .CommonLabels.namespace }}"
+
+    - name: 'messaging-receiver'
+      victorops_configs:
+        - api_key: '9f482147-18cd-4c27-a70e-32063856bada'
+          routing_key: 'route-dri-sms-sev0'
+          send_resolved: true
+          entity_display_name: "[Mumbai-1] {{ .CommonLabels.namespace }} - {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity | toUpper }}"
+          message_type: '{{ .CommonLabels.severity | toUpper }}'
+          state_message: "ALERT: {{ .CommonLabels.alertname }}\nMESSAGE: {{ .CommonAnnotations.message }}\nNAMESPACE: {{ .CommonLabels.namespace }}"
+
+    - name: 'billing-receiver'
+      victorops_configs:
+        - api_key: '9f482147-18cd-4c27-a70e-32063856bada'
+          routing_key: 'route-dri-billing-sev0'
+          send_resolved: true
+          entity_display_name: "[Mumbai-1] {{ .CommonLabels.namespace }} - {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity | toUpper }}"
+          message_type: '{{ .CommonLabels.severity | toUpper }}'
+          state_message: "ALERT: {{ .CommonLabels.alertname }}\nMESSAGE: {{ .CommonAnnotations.message }}\nNAMESPACE: {{ .CommonLabels.namespace }}"
+
+    - name: 'voice-receiver'
+      victorops_configs:
+        - api_key: '9f482147-18cd-4c27-a70e-32063856bada'
+          routing_key: 'route-dri-voice-sev0'
+          send_resolved: true
+          entity_display_name: "[Mumbai-1] {{ .CommonLabels.namespace }} - {{ .CommonLabels.alertname }} - {{ .CommonLabels.severity | toUpper }}"
+          message_type: '{{ .CommonLabels.severity | toUpper }}'
+          state_message: "ALERT: {{ .CommonLabels.alertname }}\nMESSAGE: {{ .CommonAnnotations.message }}\nNAMESPACE: {{ .CommonLabels.namespace }}"
+
+prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: 'kubernetes-pods'
+        kubernetes_sd_configs:
+        - role: pod
+          namespaces:
+                  names:
+                  - metrics   
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod_name      
+      - job_name: 'kafka-lag-exporter'
+        scrape_interval: 10m
+        ec2_sd_configs:
+          - port: 9308
+            filters:
+              - name: 'instance-state-name'
+                values: ['running']
+        relabel_configs:
+          # Monitor all ec2 which contains kafka in their prom_exporter tag
+          - source_labels: [__meta_ec2_tag_prom_exporter]
+            regex: .*kafka.*
+            action: keep
+          - source_labels: [__meta_ec2_tag_Name]
+            target_label: name
+          - source_labels: [__meta_ec2_private_ip]
+            target_label: privateip
+          - source_labels: [__meta_ec2_tag_group] 
+            target_label: group
+          - source_labels: [__meta_ec2_tag_meta_team] 
+            target_label: metateam
+        metric_relabel_configs:
+          - source_labels: [__name__]
+            regex: (kafka_consumergroup_lag)
+            action: keep
+    resources:
+      requests:
+        memory: 12000Mi
+      limits:
+        memory: 12000Mi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: standard
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 300Gi
+        selector: {}
+# Grafana Keycloak SSO config
+grafana:
+  envFromSecret: "grafana-auth-generic-oauth-secret"
+  grafana.ini:
+    users:
+      auto_assign_org: true
+      auto_assign_org_id: 1
+      auto_assign_org_role: Editor
+    server:
+      domain: eksgrafana.mum1.exotel.in
+      root_url: https://eksgrafana.mum1.exotel.in:8080/
+    auth.generic_oauth:
+      enabled: true
+      scopes: openid email profile
+      name: SSO
+      tls_skip_verify_insecure: false
+      disable_login_form: false
+      email_attribute_name: email:primary
+      allow_sign_up: true
+      auth_url: https://auth-internal.exotel.in/auth/realms/exotel-sso/protocol/openid-connect/auth
+      token_url: https://auth-internal.exotel.in/auth/realms/exotel-sso/protocol/openid-connect/token
+      api_url: https://auth-internal.exotel.in/auth/realms/exotel-sso/protocol/openid-connect/userinfo
+      # Role Attribute applicable for Grafana v6.5+
+      # role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'viewer') && 'Viewer' || 'Editor'"
+      # role_attribute_strict: true
+  # Keycloak Auth Info
+  keycloak_secret: YmY4OTMwZGMtZDZmOC00MWM4LWE1ZWItNGE0ZTIyOGFiMjc1
+  keycloak_id: ZWtzZ3JhZmFuYS1tdW0=

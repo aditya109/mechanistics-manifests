@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: legolascloud
+  namespace: argocd
+spec:
+  destination:
+    namespace: legolascloud
+    server: https://kubernetes.default.svc
+  project: voice
+  source:
+    path: legolascloud/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD

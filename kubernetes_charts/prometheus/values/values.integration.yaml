@@ -1,0 +1,116 @@
+#Alert manager config 
+
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      group_by: ['alertname']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      receiver: default
+    receivers:
+    - name: 'default'
+
+prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: 'kubernetes-pods'
+        kubernetes_sd_configs:
+        - role: pod
+          namespaces:
+                  names:
+                  - metrics
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod_name
+      - job_name: federate-istio-prometheus
+        metrics_path: /federate
+        scrape_interval: 15s
+        scrape_timeout: 10s
+        honor_labels: true
+        params:
+          'match[]':
+            - '{job=~".+"}'
+        static_configs:
+          - targets:
+            - "prometheus.istio-system.svc.cluster.local:9090"
+      - job_name: common-queue-beanstalk-metrics-1a
+        metrics_path: /metrics
+        scrape_interval: 15s
+        scrape_timeout: 10s
+        honor_labels: true
+        params:
+          'match[]':
+            - '{job=~".+"}'
+        static_configs:
+          - targets:
+            - "10.0.2.144:8080"
+      - job_name: common-queue-beanstalk-metrics-1b
+        metrics_path: /metrics
+        scrape_interval: 15s
+        scrape_timeout: 10s
+        honor_labels: true
+        params:
+          'match[]':
+            - '{job=~".+"}'
+        static_configs:
+          - targets:
+            - "10.0.3.231:8080"
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: standard
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi
+          persistentVolumeReclaimPolicy: Delete
+
+# Grafana Keycloak SSO config
+grafana:
+  envFromSecret: "grafana-auth-generic-oauth-secret"
+  grafana.ini:
+    users:
+      auto_assign_org: true
+      auto_assign_org_id: 1
+      auto_assign_org_role: Editor
+    server:
+      domain: us3-eksgrafana.corp.exotel.in
+      root_url: https://us3-eksgrafana.corp.exotel.in/
+    auth.generic_oauth:
+      enabled: true
+      scopes: openid email profile
+      name: SSO
+      tls_skip_verify_insecure: false
+      disable_login_form: false
+      email_attribute_name: email:primary
+      allow_sign_up: true
+      auth_url: https://auth-internal.exotel.in/auth/realms/exotel-sso/protocol/openid-connect/auth
+      token_url: https://auth-internal.exotel.in/auth/realms/exotel-sso/protocol/openid-connect/token
+      api_url: https://auth-internal.exotel.in/auth/realms/exotel-sso/protocol/openid-connect/userinfo
+      # Role Attribute applicable for Grafana v6.5+
+      # role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'viewer') && 'Viewer' || 'Editor'"
+      # role_attribute_strict: true
+  # Keycloak Auth Info
+  keycloak_secret: N2QyZWFjY2ItYzc1Ni00NTkwLTgyMDItNTk4MWJiM2Q1Y2I2
+  keycloak_id: ZWtzZ3JhZmFuYS1xYQ==

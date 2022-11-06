@@ -1,0 +1,10 @@
+# This has node js installed and node libraries for aerospike 
+
+FROM ubuntu:18.04 
+RUN apt-get update
+RUN apt-get -y install curl gnupg
+RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
+RUN apt-get -y install nodejs
+RUN apt-get -y install build-essential
+RUN apt-get -y install g++ libssl1.0.0 libssl-dev libz-dev
+RUN npm i -g node-gyp

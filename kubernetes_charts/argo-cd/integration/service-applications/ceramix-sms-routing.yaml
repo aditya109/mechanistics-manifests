@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ceramix-sms-routing
+  namespace: argocd
+spec:
+  destination:
+    namespace: ceramix_sms_routing
+    server: https://kubernetes.default.svc
+  project: mapi
+  source:
+    helm:
+      valueFiles:
+      - values.integration.yaml
+    path: ceramix_sms_routing/k8s
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_configs.git
+    targetRevision: HEAD
+  syncPolicy: {}

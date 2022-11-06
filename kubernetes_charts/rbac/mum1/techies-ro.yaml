@@ -1,0 +1,78 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: techies-readonly
+rules:
+  - apiGroups:
+      - "api/v1"
+      - ""
+    resources:
+      - "*"
+      - "pods/*"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+      - "create"
+      - "update"
+      - "patch"
+  - apiGroups:
+      - "*"
+    resources:
+      - "*"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+        #  - apiGroups:
+        #      - "extensions"
+        #    resources:
+        #      - "*"
+        #    verbs:
+        #      - "get"
+        #      - "list"
+        #      - "watch"
+        #  - apiGroups:
+        #      - "autoscaling"
+        #    resources:
+        #      - "*"
+        #    verbs:
+        #      - "get"
+        #      - "list"
+        #      - "watch"
+        #  - apiGroups:
+        #      - "batch"
+        #    resources:
+        #      - "jobs"
+        #      - "jobs/status"
+        #      - "cronjobs"
+        #      - "cronjobs/status"
+        #    verbs:
+        #      - "get"
+        #      - "list"
+        #      - "watch"
+        #  - apiGroups: 
+        #      - ""
+        #      - "apps"
+        #      - "api/v1"
+        #    resources: 
+        #      - "autoscaling"
+        #      - "events"
+        #      - "pods"
+        #      - "pods/log"
+        #      - "pods/exec"
+        #      - "pods/portforward"
+        #      - "deployments"
+        #      - "services"
+        #      - "configmaps"
+        #      - "namespaces"
+        #      - "nodes"
+        #      - "replicasets"
+        #      - "persistentvolumes"
+        #      - "persistentvolumeclaims"
+        #    verbs: 
+        #      - "list"
+        #      - "get"
+        #      - "watch"
+        #

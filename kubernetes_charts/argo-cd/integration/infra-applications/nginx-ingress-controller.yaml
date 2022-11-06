@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress-controller
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: infra
+  source:
+    path: nginx-ingress/ 
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/kubernetes_charts.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true

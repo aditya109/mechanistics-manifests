@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: campaignix
+  namespace: argocd
+spec:
+  destination:
+    namespace: campaignix
+    server: https://kubernetes.default.svc
+  project: mapi
+  source:
+    path: campaignix/integration
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD

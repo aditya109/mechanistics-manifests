@@ -1,0 +1,127 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-west-2:914066148492:certificate/7b1361dc-8913-44f9-aeb0-3a417d445a21"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "ssl"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "8443"
+  labels:
+    app: keycloak
+  name: keycloak
+  namespace: keycloak
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  - name: https
+    port: 8443
+    targetPort: 8443
+  selector:
+    app: keycloak
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  namespace: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:9.0.0
+        #        args: ["start-dev"]
+        resources:
+           requests:
+             cpu: 300m
+             memory: 1Gi
+           limits:
+             cpu: 600m
+             memory: 1Gi
+        env:
+        - name: KEYCLOAK_ADMIN
+          value: "admin"
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: "admin"
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        - name: DB_ADDR
+          value: 'postgres.keycloak.svc:5432'
+        - name: DB_DATABASE
+          value: postgres
+        - name: DB_USER
+          value: postgres
+        - name: DB_PASSWORD
+          value: a2V5Y2xvYWtAZXhvdGVs
+        - name: DB_SCHEMA
+          value: public
+        - name: DB_VENDOR
+          value: POSTGRES
+        - name: JGROUPS_DISCOVERY_PROTOCOL
+          value: dns.DNS_PING
+        - name: JGROUPS_DISCOVERY_PROPERTIES
+          value: "dns_query=keycloak"
+        - name: CACHE_OWNERS_COUNT
+          value: "2"
+        - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
+          value: "2"
+        livenessProbe:
+                 exec:
+                  command:
+                   - sh
+                   - -c
+                   - echo "hello"
+                 initialDelaySeconds: 30
+                 timeoutSeconds: 5
+  
+        readinessProbe:
+                 exec:
+                  command:
+                    - sh
+                    - -c
+                    - echo "hello"  
+                 initialDelaySeconds: 30
+                 timeoutSeconds: 1
+    
+        ports:
+        - name: jgroups
+          containerPort: 7600
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+          #        readinessProbe:
+          #httpGet:
+          # path: /realms/master
+          # port: 8080
+        volumeMounts:
+          - name:  keycloak-ssl-crt
+            mountPath: /etc/x509/https/tls.crt
+            subPath: tls.crt
+          - name: keycloak-ssl-key
+            mountPath: /etc/x509/https/tls.key
+            subPath: tls.key
+      volumes:
+        - name: keycloak-ssl-crt
+          configMap:
+            name: keycloak-ssl-cm
+            items:
+              - key: tls.crt
+                path: tls.crt
+        - name: keycloak-ssl-key
+          configMap:
+            name: keycloak-ssl-cm
+            items:
+              - key: tls.key
+                path: tls.key

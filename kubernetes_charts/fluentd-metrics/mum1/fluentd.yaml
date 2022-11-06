@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metrics
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fluentd-metrics
+  namespace: metrics
+  labels:
+    app: fluentd-metrics
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-metrics
+  namespace: metrics
+  labels:
+    app: fluentd-metrics
+spec:
+  minReadySeconds: 0
+  updateStrategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 3
+  selector:
+    matchLabels:
+      app: fluentd-metrics
+  template:
+    metadata:
+      labels:
+        app: fluentd-metrics
+    spec:
+      hostNetwork: true
+      serviceAccount: fluentd-metrics
+      serviceAccountName: fluentd-metrics
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: fluentd
+        image: exotelorg/fluentd-kafka:1.1.30
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 6700
+            hostPort: 6700
+            name: fluentd-port
+            protocol: UDP
+        env:
+          - name: FLUENT_KAFKA_BROKERS
+            value: "kafka-1.internal.mum1.exotel.in:9092,kafka-2.internal.mum1.exotel.in:9092,kafka-3.internal.mum1.exotel.in:9092"
+          - name: FLUENT_KAFKA_DEFAULT_TOPIC
+            value: "metrics"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+      terminationGracePeriodSeconds: 30

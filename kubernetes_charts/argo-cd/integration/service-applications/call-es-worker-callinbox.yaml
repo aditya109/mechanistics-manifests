@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: call-es-worker-callinbox
+  namespace: argocd
+spec:
+  destination:
+    namespace: call-es-worker
+    server: https://kubernetes.default.svc
+  project: data
+  source:
+    path: call-es-worker-callinbox/integration/
+    repoURL: https://cicd-exotel@bitbucket.org/Exotel/exotel_deployments.git
+    targetRevision: HEAD

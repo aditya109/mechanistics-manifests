@@ -1,0 +1,10 @@
+FROM exotelorg/alpine:3.10.2
+LABEL name="terraform"
+LABEL version=0.12.17
+ENV TERRAFORM_VERSION=0.12.17
+VOLUME ["/data"]
+WORKDIR /data
+RUN apk --update --no-cache add ca-certificates openssl sudo && \
+  wget -O terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" && \
+  unzip terraform.zip -d /bin && \
+  rm -rf terraform.zip /var/cache/apk/*

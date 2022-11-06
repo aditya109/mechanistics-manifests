@@ -1,0 +1,26 @@
+FROM alpine:3.14
+
+RUN apk update && \
+apk add ca-certificates && \
+apk add tzdata && \
+apk add gzip && \
+apk add curl && \
+apk add wget && \
+apk add tcpdump && \
+apk add nano && \
+apk add --no-cache aws-cli && \
+cp  /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && \
+echo  "Asia/Kolkata" > /etc/timezone && \
+rm -rf /var/cache/apk/*
+
+COPY capture_pcap.sh /root/capture_pcap.sh
+RUN chmod +x /root/capture_pcap.sh
+COPY upload_pcap.sh /root/upload_pcap.sh
+RUN chmod +x /root/upload_pcap.sh
+COPY start.sh /root/start.sh
+RUN chmod +x /root/start.sh
+
+WORKDIR /root
+
+CMD  echo "tcpdump sidecar started"; while true; do sleep 10000; done
+

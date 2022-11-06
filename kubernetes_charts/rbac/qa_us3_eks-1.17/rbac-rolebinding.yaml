@@ -1,0 +1,62 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: techies-rbac
+subjects:
+  - kind: User
+    name: rahil
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: dilip
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: sushant
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: shubham
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: rakshith
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: vijayshree
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: rajeev
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: janardhanan
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: janakiram
+    apiGroup: rbac.authorization.k8s.io
+
+   
+  - kind: User
+    name: sagar
+    apiGroup: rbac.authorization.k8s.io
+
+  - kind: User
+    name: mukul
+    apiGroup: rbac.authorization.k8s.io 
+  
+  - kind: User
+    name: sonal
+    apiGroup: rbac.authorization.k8s.io 
+
+  - kind: User
+    name: vanishree
+    apiGroup: rbac.authorization.k8s.io 
+roleRef:
+  kind: ClusterRole
+  name:  techies-readonly
+  apiGroup: rbac.authorization.k8s.io
+

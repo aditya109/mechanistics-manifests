@@ -1,0 +1,45 @@
+FROM centos:centos6.9 as builder
+
+ENV DOWNLOAD_PHP_UNIT 0
+
+# httpd and php installation
+RUN yum install \
+ git \
+ gcc \
+ httpd-2.2.* \
+ lua-devel \
+ httpd-tools-2.2.* \
+ mod_ssl \
+ openssl-devel \
+ php-5.3* \
+ php-cli \
+ php-common \
+ php-dba \
+ php-devel \
+ php-gd \
+ php-mbstring \
+ php-mcrypt \
+ php-mysql \
+ php-pdo \
+ php-pear-Mail \
+ php-pear \
+ php-pecl-apc \
+ php-pecl-igbinary \
+ php-pecl-memcached \
+ php-xmlrpc \
+ php-xml \
+ wget -y
+
+# php pear installation
+RUN pear install Mail && \
+    pear install Mail_Mime
+
+# php configuration
+RUN sed -i 's/;date.timezone =/date.timezone = Asia\/Calcutta/g' /etc/php.ini; \
+    sed -i 's/.*max_input_vars =.*/max_input_vars = 16000/g' /etc/php.ini
+
+# aerospike client installation
+RUN git clone https://github.com/aerospike-community/aerospike-client-php5.git /usr/src/aerospike-client-php5; \
+    cd /usr/src/aerospike-client-php5/src/aerospike; ./build.sh; \
+    make install; \
+    printf "extension=aerospike.so \naerospike.udf.lua_system_path=/path/to/aerospike/lua \naerospike.udf.lua_user_path=/path/to/aerospike/usr-lua" > /etc/php.d/aerospike.ini

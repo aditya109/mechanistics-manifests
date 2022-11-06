@@ -1,0 +1,307 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::914066148492:role/exotel-refresh20191206074434701800000008
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+
+
+  mapUsers: |
+    - userarn: arn:aws:iam::914066148492:user/athavan
+      username: athavan
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::914066148492:user/govind
+      username: govind
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/rahil
+      username: rahil
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/rakshith
+      username: rakshith
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/sushant
+      username: sushant
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/gokul
+      username: gokul
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/nobal
+      username: nobal
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/nikhil.k
+      username: nikhil.k
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::914066148492:user/Anil
+      username: Anil
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::914066148492:user/chinmay
+      username: chinmay
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::914066148492:user/abhinav
+      username: abhinav
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/adityasinghania
+      username: adityasinghania
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::914066148492:user/darshan
+      username: darshan
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/mayank.p
+      username: mayank.p
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/bhoopesh
+      username: bhoopesh
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/arjun
+      username: arjun
+      groups:
+        - system:masters
+      
+    - userarn: arn:aws:iam::914066148492:user/janardhanan
+      username: janardhanan
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/janakiram
+      username: janakiram
+      groups:
+        - system:masters
+        
+    - userarn: arn:aws:iam::914066148492:user/punith
+      username: punith
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/archit.sinha
+      username: archit.sinha
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/shubham.singh
+      username: shubham.singh
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/sagar
+      username: sagar
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/mukul
+      username: mukul
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/sonal
+      username: sonal
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/vanishree
+      username: vanishree
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/shantanu
+      username: shantanu
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/arun.nasarain
+      username: arun.nasarain
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/abhishekshingane
+      username: abhishekshingane
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/Sudaakeran
+      username: Sudaakeran
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/hema.bandari
+      username: hema.bandari
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/rudra.mishra
+      username: rudra.mishra
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/kiran.gangadharan
+      username: kiran.gangadharan
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/sriram
+      username: sriram
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/shubham.agarwal
+      username: shubham.agarwal
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/shubham.jain
+      username: shubham.jain
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/ganesha.nageshappa 
+      username: ganesha.nageshappa
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/kashish.raheja
+      username: kashish.raheja
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/utkarsh.nayak
+      username: utkarsh.nayak
+      groups:
+        - system:masters
+  
+    - userarn: arn:aws:iam::914066148492:user/shaik.moulali
+      username: shaik.moulali
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/aditya.bellary
+      username: aditya.bellary
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/varghese.jose
+      username: varghese.jose
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::914066148492:user/hemanshu.khilari
+      username: hemanshu.khilari
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/parveen.kumar
+      username: parveen.kumar
+      groups:
+        - system:masters
+        
+    - userarn: arn:aws:iam::914066148492:user/saurabh.kukreti
+      username: saurabh.kukreti
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/thirumalaisamy.chettiar
+      username: thirumalaisamy.chettiar
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/aditya.uppuluri
+      username: aditya.uppuluri
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/somodyuti_pal
+      username: somodyuti_pal
+      groups:
+        - system:masters        
+    
+    - userarn: arn:aws:iam::914066148492:user/zafar.khan
+      username: zafar.khan
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/sagar.saxena
+      username: sagar.saxena
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/shristi.pacheriwal
+      username: shristi.pacheriwal
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/sai.jayanth
+      username: sai.jayanth
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/rahul.gupta
+      username: rahul.gupta
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::914066148492:user/sree.kavya
+      username: sree.kavya
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/nishant.chaudhary
+      username: nishant.chaudhary
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/sameer.nimushakavi
+      username: sameer.nimushakavi
+      groups:
+        - system:masters
+
+    - userarn: arn:aws:iam::914066148492:user/stuti.jaiswal
+      username: stuti.jaiswal
+      groups:
+        - system:masters
+    
+    - userarn: arn:aws:iam::914066148492:user/ankur.singh
+      username: ankur.singh
+      groups:
+        - system:masters
+
+    # From here add the Read only Users
+
+    - userarn: arn:aws:iam::914066148492:user/testuserkubectlread
+      username: testuserkubectlread
+    
+    - userarn: arn:aws:iam::914066148492:user/shashank.hegde
+      username: shashank.hegde
+    
+    - userarn: arn:aws:iam::914066148492:user/ajay.paratmandali
+      username: ajay.paratmandali
+
+  mapAccounts: |
+
+

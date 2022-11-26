@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../kubernetes-kafka"
+		},
+		{
+			"path": "../kubernetes-zookeeper"
+		}
+	],
+	"settings": {}
+}
